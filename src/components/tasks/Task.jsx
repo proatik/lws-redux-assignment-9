@@ -6,7 +6,11 @@ import {
   useDeleteTaskMutation,
 } from "../../redux/features/tasks/tasksAPI";
 
+// custom hooks.
+import useImages from "../../hooks/useImages";
+
 const Task = ({ task }) => {
+  const getImage = useImages();
   const navigate = useNavigate();
   const [deleteTask] = useDeleteTaskMutation();
   const [changeStatus] = useChangeStatusMutation();
@@ -47,10 +51,7 @@ const Task = ({ task }) => {
 
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <img
-            src={`src/assets${teamMember?.avatar}`}
-            className="team-avater"
-          />
+          <img src={getImage(teamMember?.avatar)} className="team-avater" />
           <p className="lws-task-assignedOn">{teamMember?.name}</p>
         </div>
 

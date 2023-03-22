@@ -7,12 +7,16 @@ import { changeSelected } from "../../redux/features/filters/filtersSlice";
 import { useGetTeamQuery } from "../../redux/features/team/teamAPI";
 import { useGetProjectsQuery } from "../../redux/features/projects/projectsAPI";
 
+// custom hooks.
+import useImages from "../../hooks/useImages";
+
 // react components.
 import Errorr from "../ui/Errorr";
 import TeamSkeleton from "../skeletons/team/TeamSkeleton";
 import ProjectsSkeleton from "../skeletons/projects/ProjectsSkeleton";
 
 const Sidebar = () => {
+  const getImage = useImages();
   const dispatch = useDispatch();
   const { selected } = useSelector((state) => state.filters);
 
@@ -57,7 +61,7 @@ const Sidebar = () => {
 
           {team?.data?.map(({ id, name, avatar }) => (
             <div key={id} className="checkbox-container">
-              <img className="team-avater" src={`src/assets${avatar}`} />
+              <img className="team-avater" src={getImage(avatar)} />
               <p className="label">{name}</p>
             </div>
           ))}
